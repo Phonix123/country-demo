@@ -18,11 +18,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 @SpringBootApplication
 public class App extends SpringBootServletInitializer implements WebApplicationInitializer    {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return configureApplication(builder);
-    }
+//
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return configureApplication(builder);
+//    }
 
     public static void main(String[] args) {
         configureApplication(new SpringApplicationBuilder()).run(args);
