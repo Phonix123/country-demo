@@ -44,9 +44,4 @@ public class App extends SpringBootServletInitializer implements WebApplicationI
         return new RestTemplate();
     }
 
-    @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "Hello World!";
-    }
 }
