@@ -6,6 +6,8 @@
 package com.demo.controller.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ public class Test {
 
 
     @GetMapping(value = "/country-info")
-    public void info() {
-        
+    public ResponseEntity<?> info() {
+        return new ResponseEntity<>("Test", HttpStatus.OK);
     }
 }
