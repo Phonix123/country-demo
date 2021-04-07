@@ -6,7 +6,7 @@
     <groupId>com.demo</groupId>
     <artifactId>country-demo</artifactId>
     <version>1.0.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>country-demo</name>
 
@@ -90,7 +90,10 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-         
+         <dependency>
+            <groupId>org.glassfish.jersey.bundles</groupId>
+            <artifactId>jaxrs-ri</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,6 +5,9 @@
  */
 package com.demo.controller.rest;
 
+import com.demo.client.CountryOverallInfoService;
+import com.demo.dto.CountryReducedDto;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +16,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author diaspedr
- */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "rest")
 @CrossOrigin(origins = {"http://localhost:8081"})
-public class Test {
+public class CountryRest {
 
+    private final CountryOverallInfoService countryOverallInfoService;
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/country-info")
     public ResponseEntity<?> info() {
-        return new ResponseEntity<>("Test", HttpStatus.OK);
+        List<CountryReducedDto> countries = countryOverallInfoService.getListOfCountries();
+        return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 }
