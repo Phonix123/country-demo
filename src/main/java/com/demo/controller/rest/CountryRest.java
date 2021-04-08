@@ -13,7 +13,10 @@ import com.demo.dto.country.CountryInfoAndWeatherDto;
 import com.demo.dto.weather.WeatherDto;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,28 +29,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(value = "rest")
 @CrossOrigin(origins = {"http://localhost:8081"})
+@Slf4j
 public class CountryRest {
 
     private final CountryOverallInfoService countryService;
     private final WeatherlInfoService weatherService;
 
     @GetMapping(value = "/countries")
-    public ResponseEntity<?> list() throws InterruptedException {
+    public ResponseEntity<?> list(@Context HttpServletRequest request) throws InterruptedException {
+        log.info(request.getProtocol());
         List<CountryDto> countries = countryService.getListOfAllCountries();
-        
-        List<CountryInfoAndWeatherDto> result = countries.stream().parallel().map(element -> 
-            CountryInfoAndWeatherDto.builder()
-                    .info(element)
-                    //.weather(weatherService.getCapitalWeather(element))
-                    .build()
+
+        List<CountryInfoAndWeatherDto> result = countries.stream().parallel().map(element
+                -> CountryInfoAndWeatherDto.builder()
+                        .info(element)
+                        //.weather(weatherService.getCapitalWeather(element))
+                        .build()
         ).collect(Collectors.toList());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/country")
-    public ResponseEntity<?> info(@RequestParam String code) {
-        
+    public ResponseEntity<?> info(@RequestParam String code, @Context HttpServletRequest request) {
+
         CountryDto country = countryService.getCountryInformation(code);
         WeatherDto weather = weatherService.getCapitalWeather(country);
 
