@@ -20,6 +20,7 @@ public class App extends SpringBootServletInitializer implements WebApplicationI
     }
 
     private static SpringApplicationBuilder configureApplication(SpringApplicationBuilder builder) {
+
         return builder.sources(App.class);
     }
 //    public static void main(String[] args) {
