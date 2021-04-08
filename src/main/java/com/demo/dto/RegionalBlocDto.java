@@ -13,7 +13,7 @@ import lombok.Setter;
 
 /**
  *
- * @author rochrui0
+ * @author Rui Rocha
  */
 @Getter
 @Setter
