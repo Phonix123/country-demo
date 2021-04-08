@@ -26,7 +26,7 @@ public class CountryOverallInfoService {
         Client client = ClientBuilder.newClient();
 
         WebTarget webTarget = client
-                .target("https://restcountries.eu/rest/v2/all?fields=name;capital;alpha3Code");//;currencies;region;population;area;currencies;timezones;languages;flag;latlng
+                .target("https://restcountries.eu/rest/v2/all?fields=name;capital;alpha3Code");
 
         CountryDto[] response = webTarget
                 .request()
@@ -34,11 +34,7 @@ public class CountryOverallInfoService {
                 .header("Accept", "application/json")
                 .get(CountryDto[].class);
 
-//        log.info("" + (response == null ? 0 : response.length));
-
         return Arrays.asList(response);
-//        List<CountryDto> list = Arrays.asList(response);
-        //return list.stream().parallel().map(element -> CountryInfoAndWeatherDto.builder().countryInfo(element).build()).collect(Collectors.toList());
     }
 
     public CountryDto getCountryInformation(String code) {
@@ -53,7 +49,6 @@ public class CountryOverallInfoService {
                 .header("Accept", "application/json")
                 .get(CountryDto.class);
 
-//        log.info("" + (response == null ? "" : response));
         return response;
     }
 }
