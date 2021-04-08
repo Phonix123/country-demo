@@ -37,7 +37,8 @@ public class CountryRest {
 
     @GetMapping(value = "/countries")
     public ResponseEntity<?> list(@Context HttpServletRequest request) throws InterruptedException {
-        log.info(request.getScheme());
+        if(!request.isSecure())
+             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         List<CountryDto> countries = countryService.getListOfAllCountries();
 
         List<CountryInfoAndWeatherDto> result = countries.stream().parallel().map(element
@@ -52,6 +53,8 @@ public class CountryRest {
 
     @GetMapping(value = "/country")
     public ResponseEntity<?> info(@RequestParam String code, @Context HttpServletRequest request) {
+        if(!request.isSecure()/*request.getScheme().equalsIgnoreCase("http")*/)
+             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         CountryDto country = countryService.getCountryInformation(code);
         WeatherDto weather = weatherService.getCapitalWeather(country);
